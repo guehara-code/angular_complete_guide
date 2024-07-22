@@ -1,9 +1,9 @@
-<form (ngSubmit)="onSubmit(titleInput.value, textInput.value)" #form>
+<form (ngSubmit)="onSubmit(titleInput.value, textInput.value)" #form #input>
     <app-control label="Title">
         <input type="title" id="title" #titleInput/>
     </app-control>
     <app-control label="Request">
-        <textarea type="request" id="request" rows="3" #textInput></textarea>
+        <textarea type="request" id="request" rows="3" #textInput #input></textarea>
     </app-control>
     <p>
         <button appButton>
