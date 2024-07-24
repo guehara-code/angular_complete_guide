@@ -15,6 +15,8 @@ export class NewTicketComponent implements OnInit, AfterViewInit {
    @ViewChild('form') private form?: ElementRef<HTMLFormElement>;
   // private form = viewChild.required<ElementRef<HTMLFormElement>>('form');
   // @Output() add = new EventEmitter<{title: string; text: string}>();
+  enteredTitle = '';
+  enteredText = '';
   add = output<{title: string; text: string}>();
 
   ngOnInit(): void {
@@ -28,11 +30,13 @@ export class NewTicketComponent implements OnInit, AfterViewInit {
   }
 
 
-  onSubmit(title: string, ticketText: string) {
+  onSubmit() {
 
-    this.add.emit({ title: title, text: ticketText});
-    this.form?.nativeElement.reset();
+    this.add.emit({ title: this.enteredTitle, text: this.enteredText});
+    // this.form?.nativeElement.reset();
     // this.form()?.nativeElement.reset();
+    this.enteredTitle = '';
+    this.enteredText = '';
   }
 
 }
