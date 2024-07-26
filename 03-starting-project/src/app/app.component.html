@@ -5,7 +5,9 @@
 
   <app-auth />
 
-  @if (isAdmin()) {
-  <p>Only admin should see this!</p>
-  }
+  <!-- @if (isAdmin()) { -->
+  <ng-template appAuth="admin">
+    <p>Only admin should see this!</p>
+  </ng-template>
+  <!-- } -->
 </main>
