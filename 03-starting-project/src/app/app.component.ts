@@ -4,6 +4,7 @@ import { AuthComponent } from './auth/auth.component';
 import { LearningResourcesComponent } from './learning-resources/learning-resources.component';
 import { AuthService } from './auth/auth.service';
 import { AuthDirective } from './auth/auth.directive';
+import { LogDirective } from './log.directive';
 
 @Component({
   selector: 'app-root',

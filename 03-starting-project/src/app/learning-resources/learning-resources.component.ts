@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SafeLinkDirective } from '../save-link.directive';
+import { LogDirective } from '../log.directive';
 
 @Component({
   selector: 'app-learning-resources',

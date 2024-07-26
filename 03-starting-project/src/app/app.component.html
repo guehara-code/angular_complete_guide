@@ -6,8 +6,11 @@
   <app-auth />
 
   <!-- @if (isAdmin()) { -->
-  <ng-template appAuth="admin">
-    <p>Only admin should see this!</p>
-  </ng-template>
+  <!-- <ng-template appAuth="admin"> -->
+    <!-- <p>Only admin should see this!</p> -->
+     <p *appAuth="'admin'"  class="protected-content">Only admin should see this!</p>
+     <p *appAuth="'user'" class="protected-content">Regular users should see this!</p>
+     <p *appAuth="'guest'" class="protected-content">Guest users should see this!</p>
+  <!-- </ng-template> -->
   <!-- } -->
 </main>
