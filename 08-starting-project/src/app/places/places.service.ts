@@ -22,7 +22,7 @@ export class PlacesService {
     )
   }
 
-  loadUserPlaces() { 
+  loadUserPlaces() {
     return this.fetchPlaces(
       'http://localhost:3000/user-places',
       'Something went wrong fetching your favorite places. Please try again later.'
@@ -34,7 +34,7 @@ export class PlacesService {
   addPlaceToUserPlaces(place: Place) {
     const prevPlaces = this.userPlaces();
 
-    if(!prevPlaces.some((p) => p.id === place.id)) {
+    if (!prevPlaces.some((p) => p.id === place.id)) {
       this.userPlaces.set([...prevPlaces, place]);
     }
 
@@ -45,13 +45,30 @@ export class PlacesService {
         console.log('errrrrorr');
         this.userPlaces.set(prevPlaces);
         this.errorService.showError('Failed to strore selected place.');
-        
+
         return throwError(() => new Error('Failed to store selected place.'))
       })
     )
   }
 
-  removeUserPlace(place: Place) { }
+  removeUserPlace(place: Place) {
+    const prevPlaces = this.userPlaces();
+
+    if (prevPlaces.some((p) => p.id === place.id)) {
+      this.userPlaces.set(prevPlaces.filter(p => p.id !== place.id));
+    }
+
+    return this.httpClient
+      .delete('http://localhost:3000/user-places/' + place.id)
+      .pipe(catchError((error) => {
+        this.userPlaces.set(prevPlaces);
+        this.errorService.showError('Failed to remove the selected place.');
+        return throwError(
+          () => new Error('Failed to remove the selected place.')
+        );
+      })
+    );
+  };
 
   private fetchPlaces(url: string, errorMessage: string) {
     return this.httpClient
