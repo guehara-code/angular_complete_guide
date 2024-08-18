@@ -3,8 +3,10 @@ import { routes as userRoutes } from "./users/users.routes"
 
 import { NoTaskComponent } from "./tasks/no-task/no-task.component";
 import { UserTasksComponent } from "./users/user-tasks/user-tasks.component";
+import { NotFoundComponent } from "./not-found/not-found.component";
 
-import { NotFoundComponent } from "./not-found-component/not-found-component";
+
+
 
 
 export const routes: Routes = [
