@@ -1,6 +1,6 @@
 import { Component, computed, DestroyRef, inject, input, OnInit } from '@angular/core';
 import { UsersService } from '../users.service';
-import { ActivatedRoute, ActivatedRouteSnapshot, ResolveFn, RouterLink, RouterOutlet, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, ResolveFn, RouterLink, RouterOutlet, RouterState, RouterStateSnapshot } from '@angular/router';
 
 @Component({
   selector: 'app-user-tasks',
@@ -20,16 +20,21 @@ export class UserTasksComponent {
 
   // userName = computed(() => this.userService.users.find(u => u.id === this.userId())?.name);
 
-  // ngOnInit(): void {
-  //   console.log('Input Data: ' + this.message());
-  //   console.log(this.activatedRouter);
-  //   const subscription = this.activatedRouter.paramMap.subscribe({
-  //     next: (paramMap) =>
-  //       this.userName = this.userService.users.find((u) => u.id === paramMap.get('userId'))?.name || '',
-  //   });
+//   ngOnInit(): void {
+//     //   console.log('Input Data: ' + this.message());
+//     //   console.log(this.activatedRouter);
+//     //   const subscription = this.activatedRouter.paramMap.subscribe({
+//     //     next: (paramMap) =>
+//     //       this.userName = this.userService.users.find((u) => u.id === paramMap.get('userId'))?.name || '',
+//     //   });
 
-  //   this.destroyRef.onDestroy(() => subscription.unsubscribe());
-  // }
+//     //   this.destroyRef.onDestroy(() => subscription.unsubscribe());
+//     this.activatedRouter.data.subscribe({
+//       next: data => {
+//         console.log(data);
+//       }
+//     })
+//   }
 }
 
 export const resolveUserName: ResolveFn<string> = (
@@ -38,3 +43,10 @@ export const resolveUserName: ResolveFn<string> = (
   const userName = userService.users.find((u) => u.id === activatedRoute.paramMap.get('userId'))?.name || '';
   return userName;
 };
+
+export const resolveTitle: ResolveFn<string> = (
+  activatedRoute,
+  routerState
+) => {
+  return resolveUserName(activatedRoute, routerState) + '\'s Tasks'
+}
